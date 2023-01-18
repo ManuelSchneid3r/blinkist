@@ -72,3 +72,7 @@ def search_books(query: str, limit: Optional[int] = None, languages: Optional[Li
     r.raise_for_status()
     slugs = [result['slug'] for result in r.json()['hits']]
     return [Book.from_slug(slug) for slug in track(slugs, description="Retrieving search results…")]
+
+
+def get_me() -> dict:
+    return api_request_web('me')
